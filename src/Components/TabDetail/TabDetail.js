@@ -29,9 +29,13 @@ const TabDetail = ({ billData }) => {
         return data.map((bill, key) => {
             return (
                 <li key={key} onClick={() => handleTransactions(key)}>
-                    <span>{bill.name}</span>
-                    <span>{bill.categoryId}</span>
-                    <span>{bill.transactions.length}</span>
+                    <div className="flex flex-row items-center justify-between mb-1">
+                        <span>{bill.name}</span>
+                        <span>{bill.categoryId}</span>
+                    </div>
+                    <div className="flex flex-row items-center justify-between mb-3">
+                            <span>No. of transactions {bill.transactions.length}</span> 
+                    </div>
                     {renderTransactions(bill)}
                 </li>
             )
@@ -52,9 +56,9 @@ const TabDetail = ({ billData }) => {
         if(bill.showTransaction) {
             return bill.transactions.map((transaction, key) => {
                 return (
-                    <div key={key}>
-                        {transaction.date}
-                        {transaction.amount}
+                    <div key={key} className="flex flex-row -mt-3 mb-3 justify-between">
+                        <span>{transaction.date}</span>
+                        <span>£{transaction.amount}</span>
                     </div>
                 )
             })
