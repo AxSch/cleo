@@ -8,7 +8,8 @@ class TabContainer extends Component {
         super(props)
         this.state = {
             billData: [],
-            sortedBillData: null
+            sortedBillData: null,
+            icons: []
         }
         this.removeBill = this.removeBill.bind(this)
         this.addBill = this.addBill.bind(this)
@@ -30,23 +31,29 @@ class TabContainer extends Component {
         this.setState({sortedBillData: sortedData})
     }
 
-    async fetchData() {
+    async fetchBillData() {
         const req = await axios.get(APIConstants.base + 'bills/')
         this.setState({billData: req.data})
     }
 
     async removeBill(id) {
         await axios.patch(APIConstants.base + 'bills/' + id, { isBill: false})
-        this.fetchData()
+        this.fetchBillData()
     }
 
     async addBill(id) {
         await axios.patch(APIConstants.base + 'bills/' + id, { isBill: true})
-        this.fetchData()
+        this.fetchBillData()
+    }
+
+    async fetchIcons() {
+        const req = await axios.get(APIConstants.base + 'categories/')
+        this.setState({icons: req.data})
     }
     
     componentDidMount() {
-        this.fetchData()
+        this.fetchBillData()
+        this.fetchIcons()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -57,10 +64,10 @@ class TabContainer extends Component {
     }
     
     render() {
-        const { sortedBillData } = this.state
+        const { sortedBillData, icons } = this.state
         return (
             <>
-                <TabDetail billData={sortedBillData} removeBill={this.removeBill}  addBill={this.addBill}/>
+                <TabDetail billData={sortedBillData} removeBill={this.removeBill}  addBill={this.addBill} icons={icons} />
             </>
         )
     }
