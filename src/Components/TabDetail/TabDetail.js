@@ -73,6 +73,14 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
         }
     }
 
+    const handleBillData = (billData) => {
+        if (isBill) {
+            return renderBill(billData.bills)
+        } else {
+            return renderBill(billData.potentialBills)
+        }
+    }
+
     return (
         <>
             <div className="flex flex-row justify-center">
@@ -84,7 +92,7 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
             <div className="flex flex-row justify-center">
                 <div className="flex flex-row flex-wrap w-full justify-around max-w-md">
                     <ul>
-                        {isBill ? renderBill(billData.bills) : renderBill(billData.potentialBills)}
+                        {billData !== null ? handleBillData(billData) : null}
                     </ul>
                 </div>
             </div>
