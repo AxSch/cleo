@@ -17,8 +17,8 @@ const renderTransactions = (bill) => {
 
 const renderCTAbutton = (bill, removeBill, addBill) => {
     const buttonMap = {
-        true: <button onClick={() => removeBill(bill.id)}>Remove bill icon</button>,
-        false: <button onClick={() => addBill(bill.id)}>Add bill icon</button>
+        true: <button className="ml-3" onClick={() => removeBill(bill.id)}>Remove bill icon</button>,
+        false: <button className="ml-3" onClick={() => addBill(bill.id)}>Add bill icon</button>
     }
     return buttonMap[bill.isBill]
 
@@ -49,9 +49,9 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
                         <div onClick={() => handleTransactions(key)} className="mr-6">
                             <span className="pr-3">{bill.categoryId}</span>
                             <span>{bill.name}</span>
+                            {renderCTAbutton(bill, removeBill, addBill)}
                         </div>
                         {calculateBillAmount(bill)}
-                        {renderCTAbutton(bill, removeBill, addBill)}
                     </div>
                     <div className="flex flex-row items-center justify-between mb-3">
                             <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span> 
