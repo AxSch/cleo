@@ -54,7 +54,7 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
                         {renderCTAbutton(bill, removeBill, addBill)}
                     </div>
                     <div className="flex flex-row items-center justify-between mb-3">
-                            <span>No. of transactions {bill.transactions.length}</span> 
+                            <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span> 
                     </div>
                     {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mb-3">
                         <span>Date</span>
