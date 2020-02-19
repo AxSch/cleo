@@ -58,7 +58,7 @@ const calculateBillAmount = (bill) => {
 }
 
 
-const TabDetail = ({ billData, removeBill, addBill }) => {
+const TabDetail = ({ billData, removeBill, addBill, icons }) => {
     const [isBill, setIsBill] = useState(true)
     const [showTransaction, setShowTransaction] = useState(false)
 
@@ -124,7 +124,9 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
             <div className="flex flex-row justify-center">
                 <div className="flex flex-row flex-wrap w-full justify-around max-w-md">
                     <table>
-                        {billData !== null ? handleBillData(billData) : null}
+                        <tbody>
+                            {billData !== null ? handleBillData(billData) : null}
+                        </tbody>
                     </table>
                 </div>
             </div>
