@@ -37,7 +37,6 @@ const calculateBillAmount = (bill) => {
 }
 
 
-
 const TabDetail = ({ billData, removeBill, addBill }) => {
     const [isBill, setIsBill] = useState(true)
     const [showTransaction, setShowTransaction] = useState(false)
@@ -84,7 +83,7 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
     return (
         <>
             <div className="flex flex-row justify-center">
-                <div className="flex flex-row flex-wrap w-full justify-around max-w-md">
+                <div className="flex flex-row flex-wrap w-full justify-around max-w-md mb-4">
                     <div onClick={() => setIsBill(true)}>Bills</div>
                     <div onClick={() => setIsBill(false)}>Potential Bills</div>
                 </div>
