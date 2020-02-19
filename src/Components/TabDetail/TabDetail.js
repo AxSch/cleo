@@ -6,9 +6,9 @@ const renderTransactionDate = (bill) => {
     if (bill.showTransaction) {
         return bill.transactions.map((transaction, key) => {
             return (
-                <tr key={key} className="flex flex-row -mt-3 mb-3 justify-between">
-                    <td>{transaction.date}</td>
-                </tr>
+                <div id="bill-transaction-date" key={key} className="flex flex-row -mt-3 mb-3 justify-between">
+                    <div>{transaction.date}</div>
+                </div>
             )
         })
     }
@@ -19,9 +19,9 @@ const renderTransactionAmount = (bill) => {
     if (bill.showTransaction) {
         return bill.transactions.map((transaction, key) => {
             return (
-                <tr key={key} className="flex flex-row -mt-3 mb-3 justify-between">
-                    <td>£{transaction.amount}</td>
-                </tr>
+                <div id="bill-transaction-amount" key={key} className="flex flex-row -mt-3 mb-3 justify-between">
+                    <div>£{Number(transaction.amount).toFixed(2)}</div>
+                </div>
             )
         })
     }
@@ -31,12 +31,12 @@ const renderTransactionAmount = (bill) => {
 const renderCTAbutton = (bill, removeBill, addBill) => {
     const buttonMap = {
         true: (
-            <button className="ml-3 text-xl text-red-700" onClick={() => removeBill(bill.id)}>
+            <button id="bill-cta-remove" className="ml-3 text-xl text-red-700" onClick={() => removeBill(bill.id)}>
                 <FontAwesomeIcon icon={faMinusCircle} />
             </button>
         ),
         false: (
-            <button className="ml-3 text-xl text-green-600" onClick={() => addBill(bill.id)}>
+            <button id="bill-cta-add" className="ml-3 text-xl text-green-600" onClick={() => addBill(bill.id)}>
                 <FontAwesomeIcon icon={faPlusCircle} />
             </button>
         )
@@ -52,7 +52,7 @@ const calculateBillAmount = (bill) => {
     });
     return (
         <>
-            £{amount}
+            £{Number(amount).toFixed(2)}
         </>
     )
 }
@@ -72,14 +72,14 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
     const renderBill = (data) => {
         return data.map((bill, key) => {
             return (
-                <tr key={key} className={bill.showTransaction ?
+                <tr id="rendered-bill" key={key} className={bill.showTransaction ?
                     "cursor-pointer bg-gray-200" :
                     "cursor-pointer hover:bg-gray-200"}
                     onClick={() => handleTransactions(key)}>
                     <td className="pr-12 py-4 px-4">
                         <div className="flex flex-row">
                             <span className="pr-3">{renderIcon(bill.categoryId, icons)}</span>
-                            <span>{bill.name}</span>
+                            <span id="bill-name">{bill.name}</span>
                         </div>
                         <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span>
                         {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mt-2 mb-3 w-full">
@@ -89,7 +89,7 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                     </td>
                     <td className="pr-2 align-top py-4 pl-6">
                         <div>
-                            <span>{calculateBillAmount(bill)}</span>
+                            <span id="bill-total-amount">{calculateBillAmount(bill)}</span>
                         </div>
                         {bill.showTransaction ? <span className="text-sm text-gray-600">close</span> : <span className="text-sm text-gray-600">more</span>}
                         {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mt-2 mb-3 w-full">
@@ -98,7 +98,7 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                         {renderTransactionAmount(bill)}
                     </td>
                     <td className="pr-4 align-top py-4">
-                        <span>{renderCTAbutton(bill, removeBill, addBill)}</span>
+                        <span id="bill-cta">{renderCTAbutton(bill, removeBill, addBill)}</span>
                     </td>
                 </tr>
             )
@@ -130,13 +130,13 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                     <table>
                         <thead>
                             <tr className="pb-12">
-                                <th className={isBill ? 
+                                <th id="bills" className={isBill ? 
                                     "text-left px-4 py-4 border-gray-400 border-b cursor-pointer font-semibold": 
                                     "text-left px-4 py-4 border-gray-400 border-b cursor-pointer font-hairline"} 
                                     onClick={() => setIsBill(true)}>
                                         Bills
                                 </th>
-                                <th className={!isBill ? 
+                                <th id="potential-bills" className={!isBill ? 
                                     "text-left py-4 border-gray-400 border-b cursor-pointer font-semibold": 
                                     "text-left py-4 border-gray-400 border-b cursor-pointer font-hairline"} 
                                     onClick={() => setIsBill(false)}>
@@ -145,7 +145,7 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                                 <th className="py-4 border-gray-400 border-b"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="bill-list">
                             {billData !== null ? handleBillData(billData) : null}
                         </tbody>
                     </table>
