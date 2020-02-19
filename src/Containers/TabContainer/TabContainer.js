@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { APIConstants } from '../shared/constants'
-import TabDetail from '../Components/TabDetail/TabDetail'
+import { APIConstants } from '../../shared/constants'
+import TabDetail from '../../Components/TabDetail/TabDetail'
 
 class TabContainer extends Component {
     constructor(props) {

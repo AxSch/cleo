@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import welcomeIcon from './assets/welcome.jpg';
-import TabContainer from './Containers/TabContainer';
+import TabContainer from './Containers/TabContainer/TabContainer';
 
 class App extends Component {
   render() {
