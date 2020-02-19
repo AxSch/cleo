@@ -15,6 +15,27 @@ const renderTransactions = (bill) => {
     return null
 }
 
+const renderCTAbutton = (bill, removeBill, addBill) => {
+    const buttonMap = {
+        true: <button onClick={() => removeBill(bill.id)}>Remove bill icon</button>,
+        false: <button onClick={() => addBill(bill.id)}>Add bill icon</button>
+    }
+    return buttonMap[bill.isBill]
+
+}
+
+const calculateBillAmount = (bill) => {
+    let amount = 0
+    bill.transactions.forEach(transaction => {
+        amount += transaction.amount
+    });
+    return (
+        <>
+            £{amount}
+        </>
+    )
+}
+
 
 
 const TabDetail = ({ billData }) => {
