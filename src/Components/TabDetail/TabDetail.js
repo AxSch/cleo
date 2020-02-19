@@ -1,6 +1,22 @@
 import React, { useState } from 'react'
 
 
+const renderTransactions = (bill) => {
+    if(bill.showTransaction) {
+        return bill.transactions.map((transaction, key) => {
+            return (
+                <div key={key} className="flex flex-row -mt-3 mb-3 justify-between">
+                    <span>{transaction.date}</span>
+                    <span>£{transaction.amount}</span>
+                </div>
+            )
+        })
+    }
+    return null
+}
+
+
+
 const TabDetail = ({ billData }) => {
     const [isBill, setIsBill] = useState(true)
     const [showTransaction, setShowTransaction] = useState(false)
@@ -31,21 +47,6 @@ const TabDetail = ({ billData }) => {
             billData.potentialBills[key]['showTransaction'] = !showTransaction
         }
     }
-
-    const renderTransactions = (bill) => {
-        if(bill.showTransaction) {
-            return bill.transactions.map((transaction, key) => {
-                return (
-                    <div key={key} className="flex flex-row -mt-3 mb-3 justify-between">
-                        <span>{transaction.date}</span>
-                        <span>£{transaction.amount}</span>
-                    </div>
-                )
-            })
-        }
-        return null
-    }
-
 
     return (
         <>
