@@ -72,8 +72,8 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
     const renderBill = (data) => {
         return data.map((bill, key) => {
             return (
-                <tr key={key} className="" onClick={() => handleTransactions(key)}>
-                    <td className="pr-12">
+                <tr key={key} onClick={() => handleTransactions(key)}>
+                    <td className="pr-12 py-4">
                         <div className="flex flex-row">
                             <span className="pr-3">{renderIcon(bill.categoryId, icons)}</span>
                             <span>{bill.name}</span>
@@ -84,7 +84,7 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                         </div> : null}
                         {renderTransactionDate(bill)}
                     </td>
-                    <td className="pr-2 align-top">
+                    <td className="pr-2 align-top py-4 pl-6">
                         <div>
                             <span>{calculateBillAmount(bill)}</span>
                         </div>
@@ -94,7 +94,7 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                         </div> : null}
                         {renderTransactionAmount(bill)}
                     </td>
-                    <td className="pr-4 align-top">
+                    <td className="pr-4 align-top py-4">
                         <span>{renderCTAbutton(bill, removeBill, addBill)}</span>
                     </td>
                 </tr>
@@ -123,14 +123,25 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
     return (
         <>
             <div className="flex flex-row justify-center">
-                <div className="flex flex-row flex-wrap w-full justify-around max-w-md mb-4">
-                    <div onClick={() => setIsBill(true)}>Bills</div>
-                    <div onClick={() => setIsBill(false)}>Potential Bills</div>
-                </div>
-            </div>
-            <div className="flex flex-row justify-center">
-                <div className="flex flex-row flex-wrap w-full justify-around max-w-md">
+                <div className="flex flex-row flex-wrap w-full justify-around max-w-md bg-gray-100 rounded-md">
                     <table>
+                        <thead>
+                            <tr className="pb-12">
+                                <th className={isBill ? 
+                                    "text-left py-4 border-gray-400 border-b cursor-pointer font-semibold": 
+                                    "text-left py-4 border-gray-400 border-b cursor-pointer font-hairline"} 
+                                    onClick={() => setIsBill(true)}>
+                                        Bills
+                                </th>
+                                <th className={!isBill ? 
+                                    "text-left py-4 border-gray-400 border-b cursor-pointer font-semibold": 
+                                    "text-left py-4 border-gray-400 border-b cursor-pointer font-hairline"} 
+                                    onClick={() => setIsBill(false)}>
+                                        Potential Bills
+                                </th>
+                                <th className="py-4 border-gray-400 border-b"></th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {billData !== null ? handleBillData(billData) : null}
                         </tbody>
