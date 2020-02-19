@@ -57,6 +57,13 @@ const calculateBillAmount = (bill) => {
     )
 }
 
+const renderIcon = (billCategoryId, icons) => {
+    if (icons.length < 1) return null
+    const iconObj = icons.filter(icon => icon.id === billCategoryId)[0]
+    return <img width="24" height="24" src={iconObj.iconUrl} alt="Bill icon" />
+
+}
+
 
 const TabDetail = ({ billData, removeBill, addBill, icons }) => {
     const [isBill, setIsBill] = useState(true)
@@ -67,8 +74,8 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
             return (
                 <tr key={key} className="" onClick={() => handleTransactions(key)}>
                     <td className="pr-12">
-                        <div>
-                            <span className="pr-3">{bill.categoryId}</span>
+                        <div className="flex flex-row">
+                            <span className="pr-3">{renderIcon(bill.categoryId, icons)}</span>
                             <span>{bill.name}</span>
                         </div>
                         <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span>
