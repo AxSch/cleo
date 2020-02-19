@@ -44,9 +44,9 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
     const renderBill = (data) => {
         return data.map((bill, key) => {
             return (
-                <li key={key}>
+                <li key={key} onClick={() => handleTransactions(key)}>
                     <div className="flex flex-row items-center mb-1 justify-between">
-                        <div onClick={() => handleTransactions(key)} className="mr-6">
+                        <div className="mr-6">
                             <span className="pr-3">{bill.categoryId}</span>
                             <span>{bill.name}</span>
                             {renderCTAbutton(bill, removeBill, addBill)}
