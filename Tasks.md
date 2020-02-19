@@ -14,3 +14,15 @@
         - make Patch req to `http://localhost:3000/bills/:id`
         - change isBill flag to true
 4. Each action updates the list to relect changes
+
+6. Redo with table html structure
+7. Rethink component design
+8. Style
+    - Add faIcons
+    - Border around data with background colour
+    - Separator between each row & transaction
+    - active classes for tabs
+    - hover classes for bill row
+    - margin between amount & icon
+    - get icon for category
+9. Add some basic tests
