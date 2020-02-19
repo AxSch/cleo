@@ -2,14 +2,26 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
-const renderTransactions = (bill) => {
+const renderTransactionDate = (bill) => {
     if (bill.showTransaction) {
         return bill.transactions.map((transaction, key) => {
             return (
-                <div key={key} className="flex flex-row -mt-3 mb-3 justify-between">
-                    <span>{transaction.date}</span>
-                    <span>£{transaction.amount}</span>
-                </div>
+                <tr key={key} className="flex flex-row -mt-3 mb-3 justify-between">
+                    <td>{transaction.date}</td>
+                </tr>
+            )
+        })
+    }
+    return null
+}
+
+const renderTransactionAmount = (bill) => {
+    if (bill.showTransaction) {
+        return bill.transactions.map((transaction, key) => {
+            return (
+                <tr key={key} className="flex flex-row -mt-3 mb-3 justify-between">
+                    <td>£{transaction.amount}</td>
+                </tr>
             )
         })
     }
@@ -53,24 +65,32 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
     const renderBill = (data) => {
         return data.map((bill, key) => {
             return (
-                <li key={key} onClick={() => handleTransactions(key)}>
-                    <div className="flex flex-row items-center mb-1 justify-between">
-                        <div className="mr-6">
+                <tr key={key} className="" onClick={() => handleTransactions(key)}>
+                    <td className="pr-12">
+                        <div>
                             <span className="pr-3">{bill.categoryId}</span>
                             <span>{bill.name}</span>
-                            {renderCTAbutton(bill, removeBill, addBill)}
                         </div>
-                        {calculateBillAmount(bill)}
-                    </div>
-                    <div className="flex flex-row items-center justify-between mb-3">
                         <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span>
-                    </div>
-                    {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mb-3">
-                        <span>Date</span>
-                        <span>Amount</span>
-                    </div> : null}
-                    {renderTransactions(bill)}
-                </li>
+                        {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mt-2 mb-3 w-full">
+                            <span>Date</span>
+                        </div> : null}
+                        {renderTransactionDate(bill)}
+                    </td>
+                    <td className="pr-2 align-top">
+                        <div>
+                            <span>{calculateBillAmount(bill)}</span>
+                        </div>
+                        {bill.showTransaction ? <span className="text-sm text-gray-600">close</span> : <span className="text-sm text-gray-600">more</span>}
+                        {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mt-2 mb-3 w-full">
+                            <span>Amount</span>
+                        </div> : null}
+                        {renderTransactionAmount(bill)}
+                    </td>
+                    <td className="pr-4 align-top">
+                        <span>{renderCTAbutton(bill, removeBill, addBill)}</span>
+                    </td>
+                </tr>
             )
         })
     }
@@ -103,9 +123,9 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
             </div>
             <div className="flex flex-row justify-center">
                 <div className="flex flex-row flex-wrap w-full justify-around max-w-md">
-                    <ul>
+                    <table>
                         {billData !== null ? handleBillData(billData) : null}
-                    </ul>
+                    </table>
                 </div>
             </div>
         </>
