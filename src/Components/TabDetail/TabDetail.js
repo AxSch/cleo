@@ -72,8 +72,11 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
     const renderBill = (data) => {
         return data.map((bill, key) => {
             return (
-                <tr key={key} onClick={() => handleTransactions(key)}>
-                    <td className="pr-12 py-4">
+                <tr key={key} className={bill.showTransaction ?
+                    "cursor-pointer bg-gray-200" :
+                    "cursor-pointer hover:bg-gray-200"}
+                    onClick={() => handleTransactions(key)}>
+                    <td className="pr-12 py-4 px-4">
                         <div className="flex flex-row">
                             <span className="pr-3">{renderIcon(bill.categoryId, icons)}</span>
                             <span>{bill.name}</span>
@@ -128,8 +131,8 @@ const TabDetail = ({ billData, removeBill, addBill, icons }) => {
                         <thead>
                             <tr className="pb-12">
                                 <th className={isBill ? 
-                                    "text-left py-4 border-gray-400 border-b cursor-pointer font-semibold": 
-                                    "text-left py-4 border-gray-400 border-b cursor-pointer font-hairline"} 
+                                    "text-left px-4 py-4 border-gray-400 border-b cursor-pointer font-semibold": 
+                                    "text-left px-4 py-4 border-gray-400 border-b cursor-pointer font-hairline"} 
                                     onClick={() => setIsBill(true)}>
                                         Bills
                                 </th>
