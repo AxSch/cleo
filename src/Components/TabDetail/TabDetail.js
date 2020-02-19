@@ -1,29 +1,9 @@
 import React, { useState } from 'react'
 
 
-
-const sortData = (billData) => {
-    const sortedData = {
-        bills: [],
-        potentialBills: []
-    }
-
-    billData.map(bill => {
-        if (bill.isBill) {
-            sortedData.bills.push(bill)
-        } else {
-            sortedData.potentialBills.push(bill)
-        }
-    })
-    return sortedData
-}
-
-
 const TabDetail = ({ billData }) => {
     const [isBill, setIsBill] = useState(true)
     const [showTransaction, setShowTransaction] = useState(false)
-
-    const sortedData = sortData(billData)
 
     const renderBill = (data) => {
         return data.map((bill, key) => {
@@ -45,10 +25,10 @@ const TabDetail = ({ billData }) => {
     const handleTransactions = (key) => {
         if (isBill) {
             setShowTransaction(!showTransaction)
-            sortedData.bills[key]['showTransaction'] = !showTransaction
+            billData.bills[key]['showTransaction'] = !showTransaction
         } else {
             setShowTransaction(!showTransaction)
-            sortedData.potentialBills[key]['showTransaction'] = !showTransaction
+            billData.potentialBills[key]['showTransaction'] = !showTransaction
         }
     }
 
@@ -78,7 +58,7 @@ const TabDetail = ({ billData }) => {
             <div className="flex flex-row justify-center">
                 <div className="flex flex-row flex-wrap w-full justify-around max-w-md">
                     <ul>
-                        {isBill ? renderBill(sortedData.bills) : renderBill(sortedData.potentialBills)}
+                        {isBill ? renderBill(billData.bills) : renderBill(billData.potentialBills)}
                     </ul>
                 </div>
             </div>
