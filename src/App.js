@@ -6,7 +6,9 @@ class App extends Component {
   render() {
     return (
       <>
-        <img src={welcomeIcon} alt="Welcome!" />
+        <div className="flex flex-row justify-center my-12">
+          <img src={welcomeIcon} alt="Welcome!" />
+        </div>
         <TabContainer />
       </>
     );
