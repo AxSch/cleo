@@ -26,3 +26,8 @@
     - margin between amount & icon
     - get icon for category
 9. Add some basic tests
+    - Test that the component renders Component properly
+    - Test that Tabs functionality works
+    - Test that the component renders Transactions on Bill click
+    - Test removing Bill
+    - Test adding Bill
