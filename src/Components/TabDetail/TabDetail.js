@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 const renderTransactions = (bill) => {
-    if(bill.showTransaction) {
+    if (bill.showTransaction) {
         return bill.transactions.map((transaction, key) => {
             return (
                 <div key={key} className="flex flex-row -mt-3 mb-3 justify-between">
@@ -17,8 +18,16 @@ const renderTransactions = (bill) => {
 
 const renderCTAbutton = (bill, removeBill, addBill) => {
     const buttonMap = {
-        true: <button className="ml-3" onClick={() => removeBill(bill.id)}>Remove bill icon</button>,
-        false: <button className="ml-3" onClick={() => addBill(bill.id)}>Add bill icon</button>
+        true: (
+            <button className="ml-3 text-xl text-red-700" onClick={() => removeBill(bill.id)}>
+                <FontAwesomeIcon icon={faMinusCircle} />
+            </button>
+        ),
+        false: (
+            <button className="ml-3 text-xl text-green-600" onClick={() => addBill(bill.id)}>
+                <FontAwesomeIcon icon={faPlusCircle} />
+            </button>
+        )
     }
     return buttonMap[bill.isBill]
 
@@ -54,7 +63,7 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
                         {calculateBillAmount(bill)}
                     </div>
                     <div className="flex flex-row items-center justify-between mb-3">
-                            <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span> 
+                        <span className="text-sm text-gray-600">{bill.transactions.length} Transactions</span>
                     </div>
                     {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mb-3">
                         <span>Date</span>
@@ -103,4 +112,4 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
     )
 }
 
-export default TabDetail;
+export default TabDetail
