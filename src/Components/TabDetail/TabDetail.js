@@ -38,17 +38,21 @@ const calculateBillAmount = (bill) => {
 
 
 
-const TabDetail = ({ billData }) => {
+const TabDetail = ({ billData, removeBill, addBill }) => {
     const [isBill, setIsBill] = useState(true)
     const [showTransaction, setShowTransaction] = useState(false)
 
     const renderBill = (data) => {
         return data.map((bill, key) => {
             return (
-                <li key={key} onClick={() => handleTransactions(key)}>
-                    <div className="flex flex-row items-center justify-between mb-1">
-                        <span>{bill.name}</span>
-                        <span>{bill.categoryId}</span>
+                <li key={key}>
+                    <div className="flex flex-row items-center mb-1 justify-between">
+                        <div onClick={() => handleTransactions(key)} className="mr-6">
+                            <span className="pr-3">{bill.categoryId}</span>
+                            <span>{bill.name}</span>
+                        </div>
+                        {calculateBillAmount(bill)}
+                        {renderCTAbutton(bill, removeBill, addBill)}
                     </div>
                     <div className="flex flex-row items-center justify-between mb-3">
                             <span>No. of transactions {bill.transactions.length}</span> 
