@@ -56,6 +56,10 @@ const TabDetail = ({ billData, removeBill, addBill }) => {
                     <div className="flex flex-row items-center justify-between mb-3">
                             <span>No. of transactions {bill.transactions.length}</span> 
                     </div>
+                    {bill.showTransaction ? <div className="flex flex-row justify-between text-sm text-gray-600 mb-3">
+                        <span>Date</span>
+                        <span>Amount</span>
+                    </div> : null}
                     {renderTransactions(bill)}
                 </li>
             )
